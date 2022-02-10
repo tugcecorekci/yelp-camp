@@ -12,12 +12,12 @@ const User = require('./models/user')
 
 const userRoutes = require('./routes/users')
 const campgroundRoutes = require('./routes/campgrounds')
-const reviewRoutes = require('./routes/reviews');
+const reviewRoutes = require('./routes/reviews')
 
 mongoose.connect('mongodb://localhost:27017/yelp-camp', {
 })
 
-const db = mongoose.connection;
+const db = mongoose.connection
 db.on("error", console.error.bind(console, "connection error:"))
 db.once("open", () => {
     console.log("Database connected")
@@ -58,7 +58,7 @@ app.use((req, res, next) => {
     res.locals.currentUser = req.user
     res.locals.success = req.flash('success')
     res.locals.error = req.flash('error')
-    next();
+    next()
 })
 
 app.use('/', userRoutes)
@@ -74,7 +74,7 @@ app.all('*', (req, res, next) => {
 })
 
 app.use((err, req, res, next) => {
-    const { statusCode = 500 } = err;
+    const { statusCode = 500 } = err
     if (!err.message) err.message = 'Oh no! Something went wrong!'
     res.status(statusCode).render('error', { err })
 })
